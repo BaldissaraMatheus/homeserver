@@ -1,0 +1,10 @@
+---
+- hosts: airfryer
+  become: true
+  vars_files:
+    - group_vars/all/main.yml
+  roles:
+    - role: security/fail2ban
+    - role: geerlingguy.security
+  tasks:
+    - meta: noop

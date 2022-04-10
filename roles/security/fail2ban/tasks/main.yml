@@ -1,0 +1,11 @@
+---
+- name: Install fail2ban
+  package:
+    name: fail2ban
+    state: present
+
+- name: Make sure the fail2ban systemd service is enabled and started
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
