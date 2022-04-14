@@ -1,0 +1,28 @@
+---
+- name: Install smartmontools
+  package:
+    name: smartmontools
+    state: present
+
+- name: Check if smartd configuration file exists
+  stat:
+    path: /etc/smartd.conf
+  register: smartd_conf_file
+
+- name: Setup smartmontools short and long tests routine
+  copy:
+    dest: /etc/smartd.conf
+    mode: 0644
+    group: root
+    owner: root
+    content: DEVICESCAN -a -o on -S on -s (S/../.././02|L/../../6/03) -m {{ personal_email }}
+  when: not smartd_conf_file.stat.exists
+
+- name: Make sure smart systemd service is enabled and started
+  service:
+    name: smartd
+    enabled: yes
+    state: started
+
+
+

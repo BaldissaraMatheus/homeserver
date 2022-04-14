@@ -1,3 +1,4 @@
 security_sshd_name: sshd
 security_ssh_config_path: /etc/ssh/sshd_config
 security_sudoers_passworded: []
+ansible_python_interpreter: /usr/bin/python3

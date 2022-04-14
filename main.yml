@@ -3,7 +3,10 @@
   become: true
   vars_files:
     - group_vars/all/main.yml
+    - group_vars/all/private.yml
   roles:
+    - role: system/essential
+    - role: system/monitoring
     - role: security/fail2ban
     - role: geerlingguy.security
   tasks:
