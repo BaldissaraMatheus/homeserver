@@ -1,14 +1,7 @@
 security_sshd_name: sshd
 security_ssh_config_path: /etc/ssh/sshd_config
+security_ssh_port: 42069
 security_sudoers_passworded: []
 ansible_python_interpreter: /usr/bin/python3
 ntp_timezone: America/Sao_Paulo
 
-# msmtp_accounts:
-# - account:   protonmail
-#   host:      127.0.0.1
-#   port:      1025
-#   auth:      "on"
-#   from:      airfryer22@protonmail.com
-#   user:      airfryer
-#   password:  '{{ smtp_password }}'
