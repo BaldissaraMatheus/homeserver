@@ -11,5 +11,6 @@
     - role: geerlingguy.ntp
     - role: security/fail2ban
     - role: geerlingguy.security
+    - role: security/iptables
   tasks:
     - meta: noop

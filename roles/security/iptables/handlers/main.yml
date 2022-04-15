@@ -1,0 +1,12 @@
+- name: restart relevant services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - iptables
+    # - docker
+    # - crowdsec
+    # - crowdsec-firewall-bouncer
+  register: result
+  until: result is succeeded
+  retries: 2

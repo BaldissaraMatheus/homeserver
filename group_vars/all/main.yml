@@ -4,4 +4,6 @@ security_ssh_port: 42069
 security_sudoers_passworded: []
 ansible_python_interpreter: /usr/bin/python3
 ntp_timezone: America/Sao_Paulo
+iptables_rules_path: /etc/iptables/iptables.rules
+iptables_rules_default_msg: '# Empty iptables rule file'
 
