@@ -1,0 +1,20 @@
+---
+- name: Install docker
+  package:
+    name: docker
+    state: present
+
+- name: Make sure docker service is enabled and started
+  service:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: Install pip3
+  package:
+    name: python-pip
+    state: present
+  
+- name: Make sure docker module for pip is installed
+  pip:
+    name: docker >= 5.0.0

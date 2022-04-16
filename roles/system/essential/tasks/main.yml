@@ -4,10 +4,16 @@
     name: "{{ inventory_hostname }}"
 
 - name: Replace the hostname entry with our own
-  ansible.builtin.lineinfile:
+  lineinfile:
     path: /etc/hosts
     insertafter: ^127\.0\.0\.1 *localhost
     line: "127.0.0.1 {{ inventory_hostname }}"
     owner: root
     group: root
     mode: '0644'
+
+- name: Create scripts folder
+  file:
+    path: /opt/scripts
+    state: directory
+    mode: '0755'

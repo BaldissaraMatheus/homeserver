@@ -12,5 +12,7 @@
     - role: security/fail2ban
     - role: geerlingguy.security
     - role: security/iptables
+    - role: docker
+    - role: network/duckdns
   tasks:
     - meta: noop

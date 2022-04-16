@@ -1,0 +1,9 @@
+[Unit]
+Description=Update DuckDNS IP
+
+[Timer]
+Unit=update-duck-dns-ip.service
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
