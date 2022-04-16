@@ -7,6 +7,7 @@
   roles:
     - role: system/essential
     - role: system/monitoring
+    - role: jahrik.yay
     # - role: chriswayg.msmtp-mailer
     - role: geerlingguy.ntp
     - role: security/fail2ban
@@ -16,5 +17,7 @@
     - role: network/avahi
     - role: network/duckdns
     - role: network/swag
+    - role: network/swag
+    - role: filesystem/mergerfs
   tasks:
     - meta: noop

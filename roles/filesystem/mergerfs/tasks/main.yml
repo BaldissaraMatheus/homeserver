@@ -1,0 +1,49 @@
+---
+- name: Install required system packages
+  yay:
+    name: mergerfs
+    state: present
+
+- name: Create mount points for each disk
+  file:
+    path: '/mnt/{{ item }}'
+    state: directory
+    mode: 0755
+  with_items: '{{ disks }}'
+
+- name: Create mount point for mergerfs
+  file:
+    path: '/mnt/{{ mergerfs_mnt_name }}'
+    state: directory
+    mode: 0755
+
+- name: Make sure every disk is going to be mounted on boot
+  lineinfile:
+    line: '/dev/{{ item }} /mnt/{{ item }} auto nosuid,nodev,nofail,x-gvfs-show 0 0'
+    state: present
+    path: '/etc/fstab'
+  with_items: '{{ disks }}'
+  notify: Mount disks from fstab
+
+# Mounting mergerfs through fstab didn't work, so I'm using a service for that purpuse
+- name: Create script for mounting mergerfs pool
+  template:
+    src: 'mount-mergerfs-pool/script.j2'
+    dest: '/opt/scripts/mount-mergerfs-pool.sh'
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Create service for mounting mergerfs pool
+  template:
+    src: 'mount-mergerfs-pool/service.j2'
+    dest: '/etc/systemd/system/mount-mergerfs-pool.service'
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Make sure service for mounting mergerfs pool is enabled and active
+  service:
+    name: 'mount-mergerfs-pool.service'
+    enabled: yes
+    state: active

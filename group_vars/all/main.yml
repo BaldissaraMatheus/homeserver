@@ -6,4 +6,7 @@ ansible_python_interpreter: /usr/bin/python3
 ntp_timezone: America/Sao_Paulo
 iptables_rules_path: /etc/iptables/iptables.rules
 iptables_rules_default_msg: '# Empty iptables rule file'
+mergerfs_mnt_name: storage
+disks:
+  - sda3
 

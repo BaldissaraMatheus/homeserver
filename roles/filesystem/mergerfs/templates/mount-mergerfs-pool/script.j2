@@ -1,0 +1,3 @@
+#! /bin/bash
+
+sudo /usr/bin/mergerfs -o allow_other,use_ino,moveonenospc=true {{ ["/mnt/"] | product(disks) | map("join") | list | join(":") }} /mnt/{{ mergerfs_mnt_name  }}
