@@ -1,0 +1,33 @@
+---
+- name: Install avahi
+  package:
+    name: avahi
+    state: present
+
+- name: Install nss-mdns
+  package:
+    name: nss-mdns
+    state: present
+
+# https://wiki.archlinux.org/title/Avahi#Hostname_resolution
+- name: Replace hosts line in config file
+  replace: 
+    path: /etc/nsswitch.conf
+    regexp: '(^hosts: \s)(.*)$'
+    replace: '\1mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files {{ inventory_hostname }} dns'
+    backup: yes
+
+- name: Make sure avahi ssh service is present
+  copy:
+    src: /usr/share/doc/avahi/ssh.service
+    dest: /etc/avahi/services/ssh.service
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Make sure the avahi service is enabled and started
+  service:
+    name: avahi-daemon
+    enabled: yes
+    state: started
+
