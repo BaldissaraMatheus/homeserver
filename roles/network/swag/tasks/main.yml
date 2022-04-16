@@ -1,0 +1,23 @@
+---
+- name: Create docker container for Swag
+  docker_container:
+    name: swag
+    image: lscr.io/linuxserver/swag
+    capabilities:
+      - NET_ADMIN
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ ntp_timezone }}'
+      DUCKDNSTOKEN: '{{ duckdns_token }}'
+      SUBDOMAINS: '{{ duckdns_domain }}'
+      VALIDATION:  duckdns
+      EMAIL:  '{{ personal_email }}'
+    ports:
+      - 443:443
+      - 80:80
+    volumes:
+      - "/opt/docker-containers/swag/public/nginx:/config/nginx"
+      - "/opt/docker-containers/swag/dns-conf:/config/dns-conf"
+      - "/opt/docker-containers/swag/letsencrypt:/config/etc/letsencrypt"

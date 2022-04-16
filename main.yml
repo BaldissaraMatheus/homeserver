@@ -15,5 +15,6 @@
     - role: docker
     - role: network/avahi
     - role: network/duckdns
+    - role: network/swag
   tasks:
     - meta: noop
