@@ -3,6 +3,7 @@
   docker_container:
     name: duckdns
     image: linuxserver/duckdns
+    restart_policy: 'unless-stopped'
     env:
       PUID: '1000'
       PGID: '1000'
@@ -26,11 +27,10 @@
     owner: root
     group: root
 
-- name: Make sure service for updating duck DNS IP is enabled and running
+- name: Make sure service for updating duck DNS IP is enabled
   service:
     name: 'update-duck-dns-ip.service'
     enabled: yes
-    state: started
 
 - name: Create timer for updating duck DNS IP
   template:
