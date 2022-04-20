@@ -46,4 +46,4 @@
   service:
     name: 'mount-mergerfs-pool.service'
     enabled: yes
-    state: active
+    state: started

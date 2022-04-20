@@ -4,3 +4,6 @@ Description=Mount mergerfs storage pool
 [Service]
 Type=forking
 ExecStart=/opt/scripts/mount-mergerfs-pool.sh
+
+[Install]
+WantedBy=default.target
