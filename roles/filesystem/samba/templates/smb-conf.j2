@@ -1,0 +1,19 @@
+[global]
+server string = Airfryer Samba
+security = user
+map to guest = never
+usershare allow guests = no
+client min protocol = SMB3
+name resolve order = bcast host
+	
+[Airfryer Files Share Server]
+path = {{ samba_shared_directory }}
+force user = {{ samba_user }}
+force group = {{ samba_group }}
+read only  = no
+create mask = 0644
+force create mod = 0644
+directory mask = 0775
+force directory mode = 0775
+public = yes
+writable = yes

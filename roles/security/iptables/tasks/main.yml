@@ -4,12 +4,6 @@
     name: iptables
     state: present
 
-- name: Make sure the iptables systemd service is enabled and started
-  service:
-    name: iptables
-    enabled: yes
-    state: started
-
 - name: Read rules file
   shell: cat '{{ iptables_rules_path }}' || echo '{{ iptables_rules_default_msg }}'
   register: filecontent
@@ -19,7 +13,8 @@
   file:
     path: '{{ iptables_rules_path }}'
     state: absent
-  when: filecontent.stdout_lines[0] == 'iptables_rules_default_msg|string'
+  # TODO not triggering when condition is true
+  # when: filecontent.stdout_lines[0] == 'iptables_rules_default_msg|string'
 
 - name: Add default rule
   blockinfile:
@@ -59,12 +54,34 @@
     comment: Ansible managed
 
 - name: Allow HTTP and HTTPS
-  ansible.builtin.iptables:
+  iptables:
     chain: INPUT
     protocol: tcp
     destination_ports:
       - "80"
       - "443"
+    jump: ACCEPT
+    comment: Ansible managed
+
+- name: Allow Samba (UDP ports)
+  iptables:
+    chain: INPUT
+    source: 192.168.0.0/16
+    protocol: udp
+    destination_ports:
+      - "137"
+      - "138"
+    jump: ACCEPT
+    comment: Ansible managed
+
+- name: Allow Samba (TCP ports)
+  iptables:
+    chain: INPUT
+    source: 192.168.0.0/16
+    protocol: udp
+    destination_ports:
+      - "139"
+      - "445"
     jump: ACCEPT
     comment: Ansible managed
 
@@ -95,3 +112,9 @@
     marker_end: "CUSTOM RULES END"
   notify:
     - restart relevant services
+
+- name: Make sure the iptables systemd service is enabled and started
+  service:
+    name: iptables
+    enabled: yes
+    state: started

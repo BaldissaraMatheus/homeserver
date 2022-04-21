@@ -8,5 +8,8 @@ iptables_rules_path: /etc/iptables/iptables.rules
 iptables_rules_default_msg: '# Empty iptables rule file'
 mergerfs_mnt_name: storage
 disks:
-  - sda3
+  - sda4
+samba_shared_directory: '/mnt/{{ mergerfs_mnt_name }}'
+samba_user: sambauser
+samba_group: sambagroup
 

@@ -1,0 +1,41 @@
+---
+- name: Create samba group
+  group:
+    name: '{{ samba_group }}'
+    state: present
+
+- name: Create samba admin user
+  user:
+    name: '{{ samba_user }}'
+    group: '{{ samba_group }}'
+    shell: /bin/false
+    create_home: false
+
+    # TODO create access users
+
+- name: Create directory that will be shared through different services inside the same network
+  file:
+    state: directory
+    path: '{{ samba_shared_directory }}'
+    owner: '{{ samba_user }}'
+    group: '{{ samba_group }}'
+    mode: 0775
+
+- name: Install samba
+  package: 
+    name: samba
+    state: present
+
+- name: Create configuration file
+  template:
+    src: 'smb-conf.j2'
+    dest: '/etc/samba/smb.conf'
+    mode: 0755
+    owner: root
+    group: root
+  
+- name: Make sure samba service is enabled and started
+  service:
+    name: smb
+    enabled: true
+    state: started
