@@ -6,6 +6,7 @@
     - group_vars/all/main.yml
   roles:
     - role: system/essential
+    - role: system/docker
     - role: system/monitoring
     - role: jahrik.yay
     # - role: chriswayg.msmtp-mailer
@@ -13,11 +14,11 @@
     - role: security/fail2ban
     - role: geerlingguy.security
     - role: security/iptables
-    - role: docker
     - role: network/avahi
     - role: network/duckdns
     - role: network/swag
-    - role: network/swag
     - role: filesystem/mergerfs
+    - role: filesystem/samba
+    - role: services/plex
   tasks:
     - meta: noop

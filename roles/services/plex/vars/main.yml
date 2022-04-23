@@ -1,0 +1,7 @@
+plex_config_volume: "{{ docker_containers_directory }}/plex:/config"
+plex_config_volumes:
+  - "{{ plex_config_volume }}"
+plex_categories_paths: "{{ [ media_directory + '/'] | product(plex_categories) | map('join')  }}"
+plex_categories_internal_paths: "{{ plex_categories | map('lower') }}"
+plex_categories_volumes: "{{ plex_categories_paths | zip(plex_categories_internal_paths) | map('join', ':/') }}"
+plex_container_volumes: "{{ plex_config_volumes + plex_categories_volumes }}"

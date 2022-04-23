@@ -1,0 +1,22 @@
+---
+- name: Make sure media directories exists
+  file:
+    name: "{{ media_directory }}/{{ item }}"
+    state: directory
+    mode: 0755
+  with_items: "{{ plex_categories }}"
+
+- name: Create docker container for Plex
+  docker_container:
+    name: plex
+    image: lscr.io/linuxserver/plex
+    restart_policy: 'unless-stopped'
+    pull: yes
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      VERSION: 'docker'
+      PLEX_CLAIM: "{{ plex_claim }}"
+    ports:
+     32400:32400
+    volumes: "{{ plex_container_volumes }}"
