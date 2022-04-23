@@ -4,7 +4,7 @@
     state: restarted
   with_items:
     - iptables
-    # - docker
+    - docker
     # - crowdsec
     # - crowdsec-firewall-bouncer
   register: result
