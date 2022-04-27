@@ -11,13 +11,28 @@
       PGID: '1000'
       TZ: '{{ ntp_timezone }}'
       DUCKDNSTOKEN: '{{ duckdns_token }}'
-      SUBDOMAINS: '{{ duckdns_domain }}'
-      VALIDATION:  duckdns
+      URL: '{{ duckdns_domain }}'
+      VALIDATION: duckdns
       EMAIL:  '{{ personal_email }}'
     ports:
       - 443:443
       - 80:80
     volumes:
-      - "/opt/docker-containers/swag/public/nginx:/config/nginx"
-      - "/opt/docker-containers/swag/dns-conf:/config/dns-conf"
-      - "/opt/docker-containers/swag/letsencrypt:/config/etc/letsencrypt"
+      - "{{ docker_containers_directory }}/swag/config:/config"
+
+- name: Include plex proxy subfolder
+  template:
+    src: 'plex/subfolder.j2'
+    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/plex.subfolder.conf'
+    mode: 0664
+    owner: root
+    group: root
+
+- name: Include plex proxy subdomain
+  template:
+    src: 'plex/subdomain.j2'
+    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/plex.subdomain.conf'
+    mode: 0664
+    owner: root
+    group: root
+  
