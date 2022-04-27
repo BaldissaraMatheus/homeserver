@@ -12,11 +12,10 @@
     image: lscr.io/linuxserver/plex
     restart_policy: 'unless-stopped'
     pull: yes
+    network_mode: host
     env:
       PUID: '1000'
       PGID: '1000'
       VERSION: 'docker'
       PLEX_CLAIM: "{{ plex_claim }}"
-    ports:
-     32400:32400
     volumes: "{{ plex_container_volumes }}"
