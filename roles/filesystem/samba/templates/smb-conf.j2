@@ -8,8 +8,8 @@ name resolve order = bcast host
 	
 [Airfryer Files Share Server]
 path = {{ samba_shared_directory }}
-force user = root
-force group = root
+force user = {{ samba_user }}
+force group = {{ samba_group }}
 read only  = no
 create mask = 0644
 force create mode = 0644

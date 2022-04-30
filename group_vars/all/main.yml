@@ -12,8 +12,8 @@ disks:
   - sda4
 mergerfs_directory: '/mnt/{{ mergerfs_mnt_name }}'
 samba_shared_directory: '{{ mergerfs_directory }}'
-media_directory: '{{ samba_shared_directory }}/media'
-plex_categories:
+media_directory: '{{ mergerfs_directory }}/media'
+media_directories:
   - Series
   - Movies
   - Music

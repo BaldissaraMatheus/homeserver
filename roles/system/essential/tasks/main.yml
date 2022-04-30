@@ -16,4 +16,4 @@
   file:
     path: /opt/scripts
     state: directory
-    mode: '0755'
+    mode: 0755

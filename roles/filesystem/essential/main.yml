@@ -1,0 +1,8 @@
+---
+- name: Make sure media directories exists
+  file:
+    name: "{{ media_directory }}/{{ item }}"
+    state: directory
+    owner: '{{ ansible_user }}'
+    mode: 0755
+  with_items: "{{ media_directories }}"

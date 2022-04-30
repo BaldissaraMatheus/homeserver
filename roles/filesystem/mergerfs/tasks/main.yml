@@ -16,6 +16,7 @@
     path: '/mnt/{{ mergerfs_mnt_name }}'
     state: directory
     mode: 0755
+    owner: '{{ ansible_user }}'
 
 - name: Make sure every disk is going to be mounted on boot
   lineinfile:

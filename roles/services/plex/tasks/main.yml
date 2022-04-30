@@ -1,11 +1,4 @@
 ---
-- name: Make sure media directories exists
-  file:
-    name: "{{ media_directory }}/{{ item }}"
-    state: directory
-    mode: 0755
-  with_items: "{{ plex_categories }}"
-
 - name: Create docker container for Plex
   docker_container:
     name: plex

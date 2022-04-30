@@ -17,6 +17,7 @@
     - role: network/avahi
     - role: network/duckdns
     - role: filesystem/mergerfs
+    - role: filesystem/essential
     - role: filesystem/samba
     - role: services/plex
     - role: services/deluge
