@@ -1,54 +1,43 @@
 ---
-- name: Create docker container for Swag
-  docker_container:
-    name: swag
-    image: lscr.io/linuxserver/swag
-    capabilities:
-      - NET_ADMIN
-    restart_policy: 'unless-stopped'
-    env:
-      PUID: '1000'
-      PGID: '1000'
-      TZ: '{{ ntp_timezone }}'
-      DUCKDNSTOKEN: '{{ duckdns_token }}'
-      URL: '{{ duckdns_domain }}'
-      VALIDATION: duckdns
-      EMAIL:  '{{ personal_email }}'
-    ports:
-      - 443:443
-      - 80:80
-    volumes:
-      - "{{ docker_containers_directory }}/swag/config:/config"
+# TODO ta quebrado
+# - name: Create docker container for Swag
+#   docker_container:
+#     name: swag
+#     pull: yes
+#     image: lscr.io/linuxserver/swag
+#     capabilities:
+#       - NET_ADMIN
+#     restart_policy: 'unless-stopped'
+#     env:
+#       PUID: '1000'
+#       PGID: '1000'
+#       TZ: '{{ timezone }}'
+#       DUCKDNSTOKEN: '{{ duckdns_token }}'
+#       URL: '{{ duckdns_domain }}'
+#       VALIDATION: duckdns
+#       EMAIL:  '{{ personal_email }}'
+#     ports:
+#       - 443:443
+#       - 80:80
+#     volumes:
+#       - "{{ docker_containers_directory }}/swag/config:/config"
+#     networks:
+#       - name: services
 
-- name: Include plex proxy subfolder
+- name: Include proxy subfolders configurations
   template:
-    src: 'plex/subfolder.j2'
-    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/plex.subfolder.conf'
+    src: '{{ item }}/subfolder.j2'
+    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/{{ item }}.subfolder.conf'
     mode: 0664
     owner: root
     group: root
+  with_items: '{{ services }}'
 
-- name: Include proxy subdomain for Plex
+- name: Include proxy subdomains configurations
   template:
-    src: 'plex/subdomain.j2'
-    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/plex.subdomain.conf'
+    src: '{{ item }}/subdomain.j2'
+    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/{{ item }}.subdomain.conf'
     mode: 0664
     owner: root
     group: root
-  
-- name: Include proxy subfolder for Deluge
-  template:
-    src: 'deluge/subfolder.j2'
-    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/deluge.subfolder.conf'
-    mode: 0664
-    owner: root
-    group: root
-  
-- name: Include proxy subdomain for Deluge
-  template:
-    src: 'deluge/subdomain.j2'
-    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/deluge.subdomain.conf'
-    mode: 0664
-    owner: root
-    group: root
-  
+  with_items: '{{ services }}'

@@ -1,0 +1,19 @@
+---
+- name: Create docker container for Sonarr
+  docker_container:
+    name: sonarr
+    image: lscr.io/linuxserver/sonarr
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/sonarr/config:/config"
+      - "{{ mergerfs_directory }}/media/Series:/tv"
+      - "{{ mergerfs_directory }}/downloads:/downloads"
+    ports:
+      - '8989:8989'
+    networks:
+      - name: services

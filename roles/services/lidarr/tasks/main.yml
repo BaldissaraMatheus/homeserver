@@ -1,0 +1,19 @@
+---
+- name: Create docker container for Lidarr
+  docker_container:
+    name: lidarr
+    image: lscr.io/linuxserver/lidarr
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/lidarr/config:/config"
+      - "{{ mergerfs_directory }}/media/Music:/music"
+      - "{{ mergerfs_directory }}/downloads:/downloads"
+    ports:
+      - '8686:8686'
+    networks:
+      - name: services

@@ -18,3 +18,7 @@
 - name: Make sure docker module for pip is installed
   pip:
     name: docker >= 5.0.0
+
+- name: Create user custom network
+  community.docker.docker_network:
+    name: services

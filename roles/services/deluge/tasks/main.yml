@@ -12,5 +12,5 @@
       TZ: '{{ timezone }}'
     volumes: 
       - "{{ docker_containers_directory }}/deluge/config:/config"
-      - "{{ mergerfs_directory }}/Downloads:/downloads"
+      - "{{ mergerfs_directory }}/downloads:/downloads"
     network_mode: host

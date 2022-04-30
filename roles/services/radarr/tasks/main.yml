@@ -1,0 +1,19 @@
+---
+- name: Create docker container for Radarr
+  docker_container:
+    name: radarr
+    image: lscr.io/linuxserver/radarr
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/radarr/config:/config"
+      - "{{ mergerfs_directory }}/media/Movies:/movies"
+      - "{{ mergerfs_directory }}/downloads:/downloads"
+    ports:
+      - '7878:7878'
+    networks:
+      - name: services
