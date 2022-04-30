@@ -1,28 +1,29 @@
 ---
-# TODO ta quebrado
-# - name: Create docker container for Swag
-#   docker_container:
-#     name: swag
-#     pull: yes
-#     image: lscr.io/linuxserver/swag
-#     capabilities:
-#       - NET_ADMIN
-#     restart_policy: 'unless-stopped'
-#     env:
-#       PUID: '1000'
-#       PGID: '1000'
-#       TZ: '{{ timezone }}'
-#       DUCKDNSTOKEN: '{{ duckdns_token }}'
-#       URL: '{{ duckdns_domain }}'
-#       VALIDATION: duckdns
-#       EMAIL:  '{{ personal_email }}'
-#     ports:
-#       - 443:443
-#       - 80:80
-#     volumes:
-#       - "{{ docker_containers_directory }}/swag/config:/config"
-#     networks:
-#       - name: services
+- name: Create docker container for Swag
+  docker_container:
+    name: swag
+    pull: yes
+    image: ghcr.io/linuxserver/swag
+    capabilities:
+      - NET_ADMIN
+    restart_policy: 'unless-stopped'
+    # https://github.com/ansible-collections/community.docker/issues/70
+    default_host_ip: ''
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+      DUCKDNSTOKEN: '{{ duckdns_token }}'
+      URL: '{{ duckdns_domain }}'
+      VALIDATION: duckdns
+      EMAIL:  '{{ personal_email }}'
+    ports:
+      - '443:443'
+      - '80:80'
+    volumes:
+      - "{{ docker_containers_directory }}/swag/config:/config"
+    networks:
+      - name: services
 
 - name: Include proxy subfolders configurations
   template:
