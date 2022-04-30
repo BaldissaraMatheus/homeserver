@@ -1,15 +1,4 @@
 ---
-- name: Create docker container for DuckDNS
-  docker_container:
-    name: duckdns
-    image: linuxserver/duckdns
-    restart_policy: 'unless-stopped'
-    env:
-      PUID: '1000'
-      PGID: '1000'
-      TZ: '{{ ntp_timezone }}'
-      TOKEN: '{{ duckdns_token }}'
-      SUBDOMAINS: '{{ duckdns_domain }}'
 
 - name: Create script for updating duck DNS IP
   template:

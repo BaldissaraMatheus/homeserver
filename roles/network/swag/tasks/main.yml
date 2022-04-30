@@ -28,10 +28,26 @@
     owner: root
     group: root
 
-- name: Include plex proxy subdomain
+- name: Include proxy subdomain for Plex
   template:
     src: 'plex/subdomain.j2'
     dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/plex.subdomain.conf'
+    mode: 0664
+    owner: root
+    group: root
+  
+- name: Include proxy subfolder for Deluge
+  template:
+    src: 'deluge/subfolder.j2'
+    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/deluge.subfolder.conf'
+    mode: 0664
+    owner: root
+    group: root
+  
+- name: Include proxy subdomain for Deluge
+  template:
+    src: 'deluge/subdomain.j2'
+    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/deluge.subdomain.conf'
     mode: 0664
     owner: root
     group: root

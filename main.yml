@@ -20,5 +20,6 @@
     - role: filesystem/mergerfs
     - role: filesystem/samba
     - role: services/plex
+    - role: services/deluge
   tasks:
     - meta: noop
