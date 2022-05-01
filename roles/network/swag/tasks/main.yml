@@ -27,7 +27,7 @@
 
 - name: Include proxy subfolders configurations
   template:
-    src: '{{ item }}/subfolder.j2'
+    src: 'proxy-confs/{{ item }}/subfolder.j2'
     dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/{{ item }}.subfolder.conf'
     mode: 0664
     owner: root
@@ -36,9 +36,20 @@
 
 - name: Include proxy subdomains configurations
   template:
-    src: '{{ item }}/subdomain.j2'
+    src: 'proxy-confs/{{ item }}/subdomain.j2'
     dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/{{ item }}.subdomain.conf'
     mode: 0664
     owner: root
     group: root
   with_items: '{{ services }}'
+
+- name: Include Authelia configuration files
+  template:
+    src: 'nginx/{{ item }}.j2'
+    dest: '{{ docker_containers_directory }}/swag/config/nginx/{{ item }}.conf'
+    mode: 0664
+    owner: root
+    group: root
+  with_items:
+    - authelia-location
+    - authelia-server

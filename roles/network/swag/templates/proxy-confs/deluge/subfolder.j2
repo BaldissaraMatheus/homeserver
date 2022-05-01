@@ -1,7 +1,11 @@
 ## Version 2021/05/18
-# first go into lidarr settings, under "General" set the URL Base to /lidarr and restart the lidarr container
+# deluge does not require a base url setting
 
-location ^~ /music  {
+location /torrents {
+    return 301 $scheme://$host/torrents/;
+}
+
+location ^~ /torrents/ {
     # enable the next two lines for http auth
     #auth_basic "Restricted";
     #auth_basic_user_file /config/nginx/.htpasswd;
@@ -11,23 +15,15 @@ location ^~ /music  {
     #error_page 401 =200 /ldaplogin;
 
     # enable for Authelia, also enable authelia-server.conf in the default site config
-    #include /config/nginx/authelia-location.conf;
+    include /config/nginx/authelia-location.conf;
 
     include /config/nginx/proxy.conf;
     resolver 127.0.0.11;
-    set $upstream_app lidarr;
-    set $upstream_port 8686;
+    set $upstream_app deluge;
+    set $upstream_port 8112;
     set $upstream_proto http;
     proxy_pass $upstream_proto://$upstream_app:$upstream_port;
 
-}
-
-location ^~ /music/api {
-    include /config/nginx/proxy.conf;
-    resolver 127.0.0.11;
-    set $upstream_app lidarr;
-    set $upstream_port 8686;
-    set $upstream_proto http;
-    proxy_pass $upstream_proto://$upstream_app:$upstream_port;
-
+    rewrite /torrents(.*) $1 break;
+    proxy_set_header X-Deluge-Base "/torrents/";
 }

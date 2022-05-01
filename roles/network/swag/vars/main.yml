@@ -1,3 +1,3 @@
-templates_paths: "{{ lookup('pipe','find {{role_path}}/templates -type f').split('\n') }}"
-templates_files: "{{ templates_paths | map('split', 'templates/') | map('last') }}"
+templates_paths: "{{ lookup('pipe','find {{role_path}}/templates/proxy-confs -type f').split('\n') }}"
+templates_files: "{{ templates_paths | map('split', 'templates/proxy-confs/') | map('last') }}"
 services: "{{ templates_files | map('split', '/') | map('first') | unique }}"

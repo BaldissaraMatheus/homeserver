@@ -1,3 +1,4 @@
 inventory
 .ssh
 secret
+roles/services/authelia/templates/users_database.j2

@@ -1,0 +1,42 @@
+---
+- name: Install Authelia
+  docker_container:
+    name: authelia
+    image: ghcr.io/authelia/authelia:4.34.6
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/authelia/config:/config"
+    ports:
+      '9091:9091'
+    networks:
+      - name: services
+
+- name: Create logs folder
+  file:
+    path: '{{ docker_containers_directory }}/authelia/config/logs'
+    state: directory
+    mode: 0755
+    owner: '{{ ansible_user }}'
+
+- name: Load configuration file
+  template:
+    src: 'configuration.j2'
+    dest: '{{ docker_containers_directory }}/authelia/config/configuration.yml'
+    mode: 0664
+    owner: root
+    group: root
+
+- name: Load users database file
+  template:
+    src: 'users_database.j2'
+    dest: '{{ docker_containers_directory }}/authelia/config/users_database.yml'
+    mode: 0664
+    owner: root
+    group: root
+
+    # TODO incluir modificações em authelia .location e .server, e em site-confs/default

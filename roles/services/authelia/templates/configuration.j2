@@ -1,0 +1,66 @@
+jwt_secret: somethingsomethingrandomsecret
+default_redirection_url: https://{{ duckdns_domain }}
+
+server:
+  host: 0.0.0.0
+  port: 9091
+  # theme: dark
+  path: "authelia"
+
+log:
+  level: debug
+  file_path: /config/logs/authelia.log
+
+totp:
+  issuer: authelia.com
+
+authentication_backend:
+  disable_reset_password: false
+  file:
+    path: /config/users_database.yml
+    password:
+      algorithm: argon2id
+      iterations: 1
+      key_length: 32
+      salt_length: 16
+      memory: 512
+      parallelism: 8
+
+access_control:
+  default_policy: deny
+  rules:
+    - domain:
+      - {{ duckdns_domain }}
+      - '*.{{ duckdns_domain }}'
+      policy: one_factor
+
+session:
+  name: authelia_session
+  secret: somerandomsecret
+  expiration: 8h
+  domain: {{ duckdns_domain }}
+  # refresh_interval: always
+
+regulation:
+  max_retries: 3
+  find_time: 2m
+  ban_time: 5m
+storage:
+  encryption_key: somethingsomethingreallylongandsecret
+  local:
+    path: /config/db.sqlite3
+
+notifier:
+  disable_startup_check: true
+  smtp:
+    username: myemail@gmail.com
+    password: longpassword
+    host: smtp.gmail.com
+    port: 587
+    sender: {{ personal_email }}
+    subject: "[Authelia] {title}"
+    startup_check_address: test@authelia.com
+    disable_require_tls: false
+    tls:
+      skip_verify: false
+      minimum_version: TLS1.2

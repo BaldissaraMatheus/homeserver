@@ -1,7 +1,7 @@
-## Version 2021/05/28
-# first go into prowlarr settings, under "General" set the URL Base to /prowlarr and restart the prowlarr container
+## Version 2021/05/18
+# first go into sonarr settings, under "General" set the URL Base to /sonarr and restart the sonarr container
 
-location /prowlarr {
+location ^~ /series {
     # enable the next two lines for http auth
     #auth_basic "Restricted";
     #auth_basic_user_file /config/nginx/.htpasswd;
@@ -11,22 +11,22 @@ location /prowlarr {
     #error_page 401 =200 /ldaplogin;
 
     # enable for Authelia, also enable authelia-server.conf in the default site config
-    #include /config/nginx/authelia-location.conf;
+    include /config/nginx/authelia-location.conf;
 
     include /config/nginx/proxy.conf;
     resolver 127.0.0.11;
-    set $upstream_app prowlarr;
-    set $upstream_port 9696;
+    set $upstream_app sonarr;
+    set $upstream_port 8989;
     set $upstream_proto http;
     proxy_pass $upstream_proto://$upstream_app:$upstream_port;
 
 }
 
-location ~ /prowlarr(/[0-9]+)?/api {
+location ^~ /series/api {
     include /config/nginx/proxy.conf;
     resolver 127.0.0.11;
-    set $upstream_app prowlarr;
-    set $upstream_port 9696;
+    set $upstream_app sonarr;
+    set $upstream_port 8989;
     set $upstream_proto http;
     proxy_pass $upstream_proto://$upstream_app:$upstream_port;
 
