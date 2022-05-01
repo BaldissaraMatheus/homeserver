@@ -9,6 +9,7 @@
       PUID: '1000'
       PGID: '1000'
       TZ: '{{ timezone }}'
+      PREFIX: '/files'
     volumes: 
       - "{{ mergerfs_directory }}:/shared"
     ports:

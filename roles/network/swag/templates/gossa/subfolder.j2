@@ -1,8 +1,8 @@
-location /browse {
-    return 301 $scheme://$host/browse/;
+location /files {
+    return 301 $scheme://$host/files/;
 }
 
-location ^~ /browse/ {
+location ^~ /files/ {
     # enable the next two lines for http auth
     #auth_basic "Restricted";
     #auth_basic_user_file /config/nginx/.htpasswd;
@@ -15,7 +15,7 @@ location ^~ /browse/ {
     #include /config/nginx/authelia-location.conf;
 
     include /config/nginx/proxy.conf;
-		include /config/nginx/resolver.conf;
+    resolver 127.0.0.11;
 		set $upstream_app gossa;
     set $upstream_port 8001;
     set $upstream_proto http;
