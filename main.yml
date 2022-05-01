@@ -25,6 +25,7 @@
     - role: services/sonarr
     - role: services/lidarr
     - role: services/prowlarr
+    - role: services/gossa
     - role: network/swag
   tasks:
     - meta: noop
