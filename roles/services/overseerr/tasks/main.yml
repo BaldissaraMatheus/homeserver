@@ -1,0 +1,17 @@
+---
+- name: Create docker container for Overseerr
+  docker_container:
+    name: overseerr
+    image: lscr.io/linuxserver/overseerr
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/overseerr/config:/config"
+    ports:
+      - '5055:5055'
+    networks:
+      - name: services
