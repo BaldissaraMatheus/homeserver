@@ -6,27 +6,29 @@
     - group_vars/all/main.yml
   roles:
     # - role: chriswayg.msmtp-mailer
-    # - role: system/essential
-    # - role: system/docker
-    # - role: system/monitoring
-    # - role: jahrik.yay
-    # - role: geerlingguy.ntp
-    # - role: security/fail2ban
-    # - role: geerlingguy.security
-    # - role: security/iptables
-    # - role: network/avahi
-    # - role: network/duckdns
-    # - role: filesystem/mergerfs
-    # - role: filesystem/essential
-    # - role: filesystem/samba
-    # - role: services/plex
-    # - role: services/deluge
-    # - role: services/radarr
-    # - role: services/sonarr
-    # - role: services/lidarr
-    # - role: services/prowlarr
-    # - role: services/gossa
+    - role: system/essential
+    - role: system/docker
+    - role: system/monitoring
+    - role: jahrik.yay
+    - role: geerlingguy.ntp
+    - role: security/fail2ban
+    - role: geerlingguy.security
+    - role: security/iptables
+    - role: network/avahi
+    - role: network/duckdns
+    - role: filesystem/mergerfs
+    - role: filesystem/essential
+    - role: filesystem/samba
+    - role: services/plex
+    - role: services/deluge
+    - role: services/radarr
+    - role: services/sonarr
+    - role: services/lidarr
+    - role: services/bazarr
+    - role: services/overseerr
+    - role: services/prowlarr
+    - role: services/gossa
     - role: services/authelia
-    # - role: network/swag
+    - role: network/swag
   tasks:
     - meta: noop

@@ -1,4 +1,4 @@
-plex_config_volume: "{{ docker_containers_directory }}/plex:/config"
+plex_config_volume: "{{ docker_containers_directory }}/plex/config:/config"
 plex_config_volumes:
   - "{{ plex_config_volume }}"
 plex_categories_paths: "{{ [ media_directory + '/'] | product(media_directories) | map('join')  }}"

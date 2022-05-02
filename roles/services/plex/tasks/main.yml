@@ -1,6 +1,7 @@
 ---
 - name: Create docker container for Plex
   docker_container:
+    hostname: 'airfryer-plex'
     name: plex
     image: lscr.io/linuxserver/plex
     restart_policy: 'unless-stopped'
