@@ -1,0 +1,19 @@
+---
+- name: Create docker container for Ombi
+  docker_container:
+    name: ombi
+    image: lscr.io/linuxserver/ombi:latest
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+      BASE_URL: '/discover'
+    volumes: 
+      - "{{ docker_containers_directory }}/ombi/config:/config"
+    ports:
+      - '3579:3579'
+    networks:
+      - name: services
+

@@ -5,7 +5,7 @@
     - group_vars/all/private.yml
     - group_vars/all/main.yml
   roles:
-    # - role: chriswayg.msmtp-mailer
+    - role: chriswayg.msmtp-mailer
     - role: system/essential
     - role: system/docker
     - role: system/monitoring
@@ -28,6 +28,7 @@
     - role: services/overseerr
     - role: services/prowlarr
     - role: services/gossa
+    - role: services/ombi
     - role: services/authelia
     - role: network/swag
   tasks:
