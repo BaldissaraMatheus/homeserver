@@ -25,7 +25,6 @@
     - role: services/sonarr
     - role: services/lidarr
     - role: services/bazarr
-    - role: services/overseerr
     - role: services/prowlarr
     - role: services/gossa
     - role: services/ombi
