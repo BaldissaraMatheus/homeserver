@@ -7,11 +7,11 @@
 - name: Create samba admin user
   user:
     name: '{{ samba_user }}'
-    group: '{{ samba_group }}'
+    groups:
+      - '{{ samba_group }}'
+      - wheel
     shell: /bin/false
     create_home: false
-
-    # TODO create access users
 
 - name: Create directory that will be shared through different services inside the same network
   file:

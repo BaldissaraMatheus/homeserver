@@ -5,6 +5,8 @@ map to guest = never
 usershare allow guests = no
 client min protocol = SMB3
 name resolve order = bcast host
+log file = /var/log/samba/log.%m
+max log size = 50
 	
 [Airfryer Files Share Server]
 path = {{ samba_shared_directory }}
