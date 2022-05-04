@@ -1,0 +1,19 @@
+---
+- name: Create docker container for Filebrowser
+  docker_container:
+    name: filebrowser
+    image: hurlenko/filebrowser
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+      FB_BASEURL: '/files'
+    volumes: 
+      - "{{ mergerfs_directory }}:/data"
+      - "{{ docker_containers_directory }}/filebrowser:/config"
+    ports:
+      - '8080:8080'
+    networks:
+      - name: services

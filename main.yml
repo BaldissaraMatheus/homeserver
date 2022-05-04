@@ -19,6 +19,7 @@
     - role: filesystem/mergerfs
     - role: filesystem/essential
     - role: filesystem/samba
+    - role: services/filebrowser
     - role: services/plex
     - role: services/deluge
     - role: services/radarr
@@ -26,7 +27,6 @@
     - role: services/lidarr
     - role: services/bazarr
     - role: services/prowlarr
-    - role: services/gossa
     - role: services/ombi
     - role: services/authelia
     - role: network/swag
