@@ -85,6 +85,17 @@
     jump: ACCEPT
     comment: Ansible managed
 
+- name: Allow Deluge
+  iptables:
+    chain: INPUT
+    # Docker "services" network subnet
+    source: 127.18.0.0/16
+    protocol: tcp
+    destination_ports:
+      - "8112"
+    jump: ACCEPT
+    comment: Ansible managed
+
 - name: Set the policy for the INPUT chain to DROP
   ansible.builtin.iptables:
     chain: INPUT
