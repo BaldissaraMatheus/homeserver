@@ -29,6 +29,7 @@
     - role: services/prowlarr
     - role: services/ombi
     - role: services/authelia
+    - role: services/raneto
     - role: network/swag
   tasks:
     - meta: noop

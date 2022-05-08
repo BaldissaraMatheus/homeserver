@@ -13,9 +13,4 @@
     volumes: 
       - "{{ docker_containers_directory }}/deluge/config:/config"
       - "{{ mergerfs_directory }}/downloads:/downloads"
-    ports:
-      - '8112:8112'
-      - '6881:6881'
-      - '6881:6881/udp'
-    networks:
-      - name: services
+    network_mode: host

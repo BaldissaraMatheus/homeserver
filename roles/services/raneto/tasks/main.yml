@@ -1,0 +1,17 @@
+---
+- name: Install Raneto
+  docker_container:
+    name: raneto
+    image: lscr.io/linuxserver/raneto:latest
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/raneto:/config"
+    ports:
+      - '3001:3000'
+    networks:
+      - name: services

@@ -43,6 +43,14 @@
     group: root
   with_items: '{{ services }}'
 
+- name: Include default site configurations
+  template:
+    src: 'site-confs/default.j2'
+    dest: '{{ docker_containers_directory }}/swag/config/nginx/site-confs/default'
+    mode: 0664
+    owner: root
+    group: root
+
 - name: Include Authelia configuration files
   template:
     src: 'nginx/{{ item }}.j2'
