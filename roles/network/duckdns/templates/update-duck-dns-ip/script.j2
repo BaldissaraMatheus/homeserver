@@ -1,3 +1,3 @@
 #! /bin/bash
-ipv6=$(curl ident.me)
-curl "https://www.duckdns.org/update?domains={{ duckdns_domain }}&token={{ duckdns_token }}&ipv6=$ipv6"
+ip=$(curl ifconfig.me)
+curl "https://www.duckdns.org/update?domains={{ duckdns_domain }}&token={{ duckdns_token }}&ip=$ip"
