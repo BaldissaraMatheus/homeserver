@@ -13,7 +13,7 @@
     - role: geerlingguy.ntp
     - role: security/fail2ban
     - role: geerlingguy.security
-    - role: security/iptables
+    # - role: security/iptables
     - role: network/avahi
     - role: network/duckdns
     - role: filesystem/mergerfs
@@ -30,6 +30,7 @@
     - role: services/ombi
     - role: services/authelia
     - role: services/raneto
+    - role: services/watchtower
     - role: network/swag
   tasks:
     - meta: noop
