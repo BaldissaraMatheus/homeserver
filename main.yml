@@ -27,10 +27,10 @@
     - role: services/lidarr
     - role: services/bazarr
     - role: services/prowlarr
-    - role: services/ombi
     - role: services/authelia
     - role: services/raneto
     - role: services/watchtower
+    - role: services/overseer
     - role: network/swag
   tasks:
     - meta: noop
