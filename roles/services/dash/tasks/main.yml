@@ -1,0 +1,23 @@
+---
+- name: Create docker container for dashdot
+  docker_container:
+    name: dashdot
+    image: mauricenino/dashdot:latest
+    pull: yes
+    restart_policy: 'unless-stopped'
+    privileged: yes
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+      DASHDOT_ENABLE_CPU_TEMPS: yes
+    volumes: 
+      - "{{ docker_containers_directory }}/dash/config:/config"
+      - "/etc/os-release:/etc/os-release:ro"
+      - "/proc/1/ns/net:/mnt/host_ns_net:ro"
+      - "/mnt/storage:/mnt/host_storage:ro"
+    ports:
+      - '3001:3001'
+    networks:
+      - name: services
+
