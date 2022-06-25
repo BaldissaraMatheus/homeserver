@@ -5,11 +5,13 @@
     image: hurlenko/filebrowser
     pull: yes
     restart_policy: 'unless-stopped'
+    user: 1000:1000
     env:
       PUID: '1000'
       PGID: '1000'
       TZ: '{{ timezone }}'
       FB_BASEURL: '/files'
+      FB_NOAUTH: 'noauth'
     volumes: 
       - "{{ mergerfs_directory }}:/data"
       - "{{ docker_containers_directory }}/filebrowser:/config"
