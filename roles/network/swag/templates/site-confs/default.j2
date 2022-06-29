@@ -44,6 +44,7 @@ server {
         # enable for Authelia
         #include /config/nginx/authelia-location.conf;
         # rewrite ^/$ /docs break;
+        return 301 {{ documentation_link }};
         try_files $uri $uri/ /index.html /index.php?$args =404;
     }
 
