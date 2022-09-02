@@ -34,15 +34,6 @@
     group: root
   with_items: '{{ services }}'
 
-- name: Include proxy subdomains configurations
-  template:
-    src: 'proxy-confs/{{ item }}/subdomain.j2'
-    dest: '{{ docker_containers_directory }}/swag/config/nginx/proxy-confs/{{ item }}.subdomain.conf'
-    mode: 0664
-    owner: root
-    group: root
-  with_items: '{{ services }}'
-
 - name: Include default site configurations
   template:
     src: 'site-confs/default.j2'

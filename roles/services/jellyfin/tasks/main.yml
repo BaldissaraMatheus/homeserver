@@ -1,0 +1,18 @@
+---
+- name: Create docker container for Jellyfin
+  docker_container:
+    name: jellyfin
+    image: lscr.io/linuxserver/jellyfin:latest
+    restart_policy: 'unless-stopped'
+    pull: yes
+    network_mode: host
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      VERSION: 'latest'
+      TZ: '{{ timezone }}'
+      NVIDIA_VISIBLE_DEVICES: 'all'
+    volumes:
+    - "{{ docker_containers_directory }}/jellyfin/config:/config"
+    - "{{ media_directory }}/Series:/data/tvshows"
+    - "{{ media_directory }}/Movies:/data/movies"
