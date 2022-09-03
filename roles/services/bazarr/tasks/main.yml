@@ -17,3 +17,10 @@
       - '6767:6767'
     networks:
       - name: services
+
+- name: Copy config file
+  template:
+    src: 'config.ini.j2'
+    dest: '{{ docker_containers_directory }}/bazarr/config/config/config.ini'
+    mode: 0755
+    owner: '{{ ansible_user }}'

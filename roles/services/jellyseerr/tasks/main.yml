@@ -16,3 +16,9 @@
     networks:
       - name: services
 
+- name: Copy config file
+  template:
+    src: 'settings.json.j2'
+    dest: '{{ docker_containers_directory }}/jellyseerr/config/settings.json'
+    mode: 0755
+    owner: '{{ ansible_user }}'
