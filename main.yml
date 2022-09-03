@@ -31,9 +31,11 @@
     # - role: services/prowlarr
     # - role: services/authelia
     # - role: services/raneto
-    - role: services/watchtower
+    # - role: services/watchtower
+    # - role: services/watchtower
     # - role: services/overseer
+    - role: services/jellyseerr
     # - role: services/dash
-    # - role: network/swag
+    - role: network/swag
   tasks:
     - meta: noop
