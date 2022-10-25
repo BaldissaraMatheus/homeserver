@@ -34,8 +34,10 @@
     # - role: services/watchtower
     # - role: services/watchtower
     # - role: services/overseer
-    - role: services/jellyseerr
+    # - role: services/jellyseerr
     # - role: services/dash
     # - role: network/swag
+    # - role: services/ytdl-sub
+    - role: services/unmanic
   tasks:
     - meta: noop
