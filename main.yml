@@ -33,7 +33,6 @@
     # - role: services/raneto
     # - role: services/watchtower
     # - role: services/watchtower
-    # - role: services/overseer
     # - role: services/jellyseerr
     # - role: services/dash
     # - role: network/swag
