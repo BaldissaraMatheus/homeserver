@@ -22,7 +22,7 @@
     # - role: filesystem/samba
     # - role: services/filebrowser
     # - role: services/plex
-    # - role: services/jellyfin
+    - role: services/jellyfin
     # - role: services/deluge
     # - role: services/radarr
     # - role: services/sonarr
@@ -37,6 +37,6 @@
     # - role: services/dash
     # - role: network/swag
     # - role: services/ytdl-sub
-    - role: services/unmanic
+    # - role: services/unmanic
   tasks:
     - meta: noop

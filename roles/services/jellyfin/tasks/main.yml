@@ -16,3 +16,4 @@
     - "{{ docker_containers_directory }}/jellyfin/config:/config"
     - "{{ media_directory }}/Series:/data/tvshows"
     - "{{ media_directory }}/Movies:/data/movies"
+    - "{{ media_directory }}/Movies 4K:/data/movies-4k"
