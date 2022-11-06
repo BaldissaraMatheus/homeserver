@@ -22,12 +22,12 @@
     # - role: filesystem/samba
     # - role: services/filebrowser
     # - role: services/plex
-    - role: services/jellyfin
+    # - role: services/jellyfin
     # - role: services/deluge
     # - role: services/radarr
     # - role: services/sonarr
     # - role: services/lidarr
-    # - role: services/bazarr
+    - role: services/bazarr
     # - role: services/prowlarr
     # - role: services/authelia
     # - role: services/raneto

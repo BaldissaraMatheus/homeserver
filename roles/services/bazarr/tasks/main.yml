@@ -24,3 +24,28 @@
     dest: '{{ docker_containers_directory }}/bazarr/config/config/config.ini'
     mode: 0755
     owner: '{{ ansible_user }}'
+
+- name: Create docker container for Bazarr (for 4K movies)
+  docker_container:
+    name: bazarr-4k
+    image: lscr.io/linuxserver/bazarr
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/bazarr-4k/config:/config"
+      - "{{ mergerfs_directory }}/media/Movies 4K:/movies"
+    ports:
+      - '6768:6767'
+    networks:
+      - name: services
+
+- name: Copy config file (4K)
+  template:
+    src: 'config-4k.ini.j2'
+    dest: '{{ docker_containers_directory }}/bazarr-4k/config/config/config.ini'
+    mode: 0755
+    owner: '{{ ansible_user }}'
