@@ -16,4 +16,5 @@ media_directory: '{{ mergerfs_directory }}/media'
 media_directories:
   - Series
   - Movies
+  - Movies 4K
   - Music
