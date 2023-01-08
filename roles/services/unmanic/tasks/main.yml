@@ -12,7 +12,8 @@
     volumes: 
       - "{{ docker_containers_directory }}/unmanic/config:/config"
       - "{{ docker_containers_directory }}/unmanic/temp:/tmp/unmanic"
-      - "{{ mergerfs_directory }}/media:/library"
+      - "{{ mergerfs_directory }}/downloaded:/library/downloaded"
+      - "{{ mergerfs_directory }}/media:/library/media"
     ports:
       - '8888:8888' # UI
     networks:

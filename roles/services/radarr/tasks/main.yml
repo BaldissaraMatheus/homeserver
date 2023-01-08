@@ -13,6 +13,7 @@
       - "{{ docker_containers_directory }}/radarr/config:/config"
       - "{{ mergerfs_directory }}/media/Movies:/movies"
       - "{{ mergerfs_directory }}/downloads:/downloads"
+      - "{{ mergerfs_directory }}/downloaded/movies:/downloaded"
     ports:
       - '7878:7878'
     networks:
@@ -32,6 +33,7 @@
       - "{{ docker_containers_directory }}/radarr-4k/config:/config"
       - "{{ mergerfs_directory }}/media/Movies 4K:/movies"
       - "{{ mergerfs_directory }}/downloads:/downloads"
+      - "{{ mergerfs_directory }}/downloaded/movies-4k:/downloaded"
     ports:
       - '7879:7878'
     networks:

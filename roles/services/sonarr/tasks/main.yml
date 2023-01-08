@@ -13,6 +13,7 @@
       - "{{ docker_containers_directory }}/sonarr/config:/config"
       - "{{ mergerfs_directory }}/media/Series:/tv"
       - "{{ mergerfs_directory }}/downloads:/downloads"
+      - "{{ mergerfs_directory }}/downloaded/series:/downloaded"
     ports:
       - '8989:8989'
     networks:
