@@ -12,4 +12,9 @@
       PGID: '1000'
       VERSION: 'latest'
       PLEX_CLAIM: "{{ plex_claim }}"
-    volumes: "{{ plex_container_volumes }}"
+    volumes: 
+      - "{{ docker_containers_directory }}/plex/config:/config"
+      - "{{ media_directory }}/Series:/tv"
+      - "{{ media_directory }}/Movies:/movies"
+      - "{{ media_directory }}/Movies 4K:/movies-4k"
+      
