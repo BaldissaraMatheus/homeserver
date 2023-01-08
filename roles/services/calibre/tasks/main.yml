@@ -1,0 +1,36 @@
+---
+- name: Create docker container for Calibre
+  docker_container:
+    name: calibre
+    image: lscr.io/linuxserver/calibre
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/calibre/config:/config"
+    ports:
+      - '8090:8080'
+      - '8091:8081'
+    networks:
+      - name: services
+
+- name: Create docker container for Calibre Web
+  docker_container:
+    name: calibre-web
+    image: lscr.io/linuxserver/calibre-web
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/calibre-web/config:/config"
+      - "{{ mergerfs_directory }}/media/Books:/books"
+    ports:
+      - '8083:8083'
+    networks:
+      - name: services
