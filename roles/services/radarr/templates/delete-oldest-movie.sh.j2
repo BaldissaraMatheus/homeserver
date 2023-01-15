@@ -1,0 +1,5 @@
+#!/bin/bash
+
+MOVIES_DIR="/movies"
+OLDEST_ADDED=$(ls $MOVIES_DIR  -t | tail -1);
+rm -r "$MOVIES_DIR/$OLDEST_ADDED";

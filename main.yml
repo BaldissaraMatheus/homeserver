@@ -25,7 +25,7 @@
     # - role: services/jellyfin
     # - role: services/deluge
     - role: services/radarr
-    - role: services/sonarr
+    # - role: services/sonarr
     # - role: services/lidarr
     # - role: services/bazarr
     # - role: services/prowlarr
@@ -37,7 +37,7 @@
     # - role: services/dash
     # - role: network/swag
     # - role: services/ytdl-sub
-    - role: services/unmanic
+    # - role: services/unmanic
     # - role: services/calibre
   tasks:
     - meta: noop

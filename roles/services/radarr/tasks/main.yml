@@ -13,11 +13,20 @@
       - "{{ docker_containers_directory }}/radarr/config:/config"
       - "{{ mergerfs_directory }}/media/Movies:/movies"
       - "{{ mergerfs_directory }}/downloads:/downloads"
-      - "{{ mergerfs_directory }}/downloaded/movies:/downloaded"
+      - "{{ mergerfs_directory }}/configs:/configs"
     ports:
       - '7878:7878'
     networks:
       - name: services
+
+# Enable this on "importing" and "added" hooks
+- name: Create script for deleting oldest movies when added new ones
+  template:
+    src: 'delete-oldest-movie.sh.j2'
+    dest: '{{ mergerfs_directory }}/configs/delete-oldest-movie.sh'
+    mode: 0755
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
 
 - name: Create docker container for Radarr (for 4K movies)
   docker_container:
@@ -33,7 +42,6 @@
       - "{{ docker_containers_directory }}/radarr-4k/config:/config"
       - "{{ mergerfs_directory }}/media/Movies 4K:/movies"
       - "{{ mergerfs_directory }}/downloads:/downloads"
-      - "{{ mergerfs_directory }}/downloaded/movies-4k:/downloaded"
     ports:
       - '7879:7878'
     networks:
