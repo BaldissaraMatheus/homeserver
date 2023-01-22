@@ -16,6 +16,6 @@
       - "{{ mergerfs_directory }}:/data"
       - "{{ docker_containers_directory }}/filebrowser:/config"
     ports:
-      - '8080:8080'
+      - '8082:8080'
     networks:
       - name: services

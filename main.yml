@@ -18,13 +18,14 @@
     # - role: network/avahi
     # - role: network/duckdns
     # - role: filesystem/mergerfs
-    - role: filesystem/snapraid
+    # - role: filesystem/snapraid
     # - role: filesystem/essential
     # - role: filesystem/samba
     # - role: services/filebrowser
     # - role: services/plex
     # - role: services/jellyfin
-    # - role: services/deluge
+    # - role: services/transmission
+    # - role: services/qbittorrent
     # - role: services/radarr
     # - role: services/sonarr
     # - role: services/lidarr
@@ -36,7 +37,7 @@
     # - role: services/watchtower
     # - role: services/jellyseerr
     # - role: services/dash
-    # - role: network/swag
+    - role: network/swag
     # - role: services/ytdl-sub
     # - role: services/unmanic
     # - role: services/calibre

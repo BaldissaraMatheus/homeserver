@@ -1,0 +1,16 @@
+- name: Create docker container for qbittorrent
+  docker_container:
+    name: qbittorrent
+    image: cr.hotio.dev/hotio/qbittorrent
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      UMASK: '002'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/qbittorrent:/config"
+      - "{{ mergerfs_directory }}/downloads:/app/qBittorrent/downloads"
+    # network_mode: host
+    network_mode: host
