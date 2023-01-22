@@ -1,15 +1,17 @@
 ---
 - name: Install required system packages
-  yay:
-    name: mergerfs
-    state: present
+  kewlfft.aur.aur:
+    use: yay
+    name: 
+      - mergerfs
 
 - name: Create mount points for each disk
   file:
     path: '/mnt/{{ item }}'
     state: directory
     mode: 0755
-  with_items: '{{ disks }}'
+    owner: '{{ ansible_user }}'
+  with_items: '{{ disks + parity_disks }}'
 
 - name: Create mount point for mergerfs
   file:
@@ -23,7 +25,7 @@
     line: '/dev/{{ item }} /mnt/{{ item }} auto nosuid,nodev,nofail,x-gvfs-show 0 0'
     state: present
     path: '/etc/fstab'
-  with_items: '{{ disks }}'
+  with_items: '{{ disks + parity_disks }}'
   notify: Mount disks from fstab
 
 # Mounting mergerfs through fstab didn't work, so I'm using a service for that purpuse

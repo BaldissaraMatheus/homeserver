@@ -1,0 +1,70 @@
+---
+- name: Install snapraid
+  kewlfft.aur.aur:
+    use: yay
+    name: 
+      - snapraid
+
+- name: Create configuration file
+  template:
+    src: 'snapraid.conf.j2'
+    dest: '/etc/snapraid.conf'
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Ensures snapraid scripts folder exists
+  file: 
+    path: "/mnt/storage/scripts/snapraid"
+    state: directory
+
+- name: Ensures asdasd scripts folder exists
+  file: 
+    path: "/var/snapraid"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Create snapraid-runner script file
+  template:
+    src: 'snapraid-runner.py'
+    dest: '/mnt/storage/scripts/snapraid/snapraid-runner.py'
+    mode: 0755
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+
+- name: Create snapraid-runner configuration file
+  template:
+    src: 'snapraid-runner.conf.j2'
+    dest: '/mnt/storage/scripts/snapraid/snapraid-runner.conf.j2'
+    mode: 0755
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+
+- name: Create service for snapraid-runner
+  template:
+    src: 'service.j2'
+    dest: '/etc/systemd/system/snapraid-runner.service'
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Make sure service for snapraid-runner is enabled
+  service:
+    name: 'snapraid-runner.service'
+    enabled: yes
+
+- name: Create timer for snapraid-runner service
+  template:
+    src: 'timer.j2'
+    dest: '/etc/systemd/system/snapraid-runner.timer'
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Make sure timer for snapraid-runner service is running
+  service:
+    name: 'snapraid-runner.timer'
+    enabled: yes
+    state: started

@@ -1,6 +1,3 @@
 ---
 - name: Mount disks from fstab
   shell: mount -a
-  # https://stackoverflow.com/a/41293073
-  args:
-    warn: no

@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync snapraid
+
+[Timer]
+Unit=snapraid-runner.service
+OnCalendar=weekly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
