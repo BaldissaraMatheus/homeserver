@@ -17,6 +17,7 @@
     # - role: security/iptables
     # - role: network/avahi
     # - role: network/duckdns
+    # - role: network/cloudflared
     # - role: filesystem/mergerfs
     # - role: filesystem/snapraid
     # - role: filesystem/essential
@@ -41,5 +42,7 @@
     # - role: services/ytdl-sub
     # - role: services/unmanic
     # - role: services/calibre
+    # - role: services/nextcloud
+    # - role: services/focalboard
   tasks:
     - meta: noop

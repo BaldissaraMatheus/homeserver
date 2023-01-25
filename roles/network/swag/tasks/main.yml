@@ -13,13 +13,13 @@
       PUID: '1000'
       PGID: '1000'
       TZ: '{{ timezone }}'
-      DUCKDNSTOKEN: '{{ duckdns_token }}'
-      URL: '{{ duckdns_domain }}'
-      VALIDATION: duckdns
+      URL: '{{ domain }}'
+      VALIDATION: http
       EMAIL:  '{{ personal_email }}'
+      DNSPLUGIN: 'cloudflare'
     ports:
-      - '443:443'
-      - '80:80'
+      - '444:443'
+      - '81:80'
     volumes:
       - "{{ docker_containers_directory }}/swag/config:/config"
     networks:

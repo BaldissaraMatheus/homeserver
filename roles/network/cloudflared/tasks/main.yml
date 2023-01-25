@@ -1,0 +1,13 @@
+---
+- name: Install and configure cloudflared
+  kewlfft.aur.aur:
+    use: yay
+    name: 
+      - cloudflared
+
+- name: Make sure the cloudflared service is enabled and started
+  service:
+    name: cloudflared
+    enabled: yes
+
+# Now open cloudflare zero trust and run the cloudflared service install command

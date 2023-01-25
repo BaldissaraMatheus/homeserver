@@ -1,5 +1,5 @@
 jwt_secret: somethingsomethingrandomsecret
-default_redirection_url: https://{{ duckdns_domain }}
+default_redirection_url: https://{{ domain }}
 
 server:
   host: 0.0.0.0
@@ -30,15 +30,15 @@ access_control:
   default_policy: deny
   rules:
     - domain:
-      - {{ duckdns_domain }}
-      - '*.{{ duckdns_domain }}'
+      - {{ domain }}
+      - '*.{{ domain }}'
       policy: one_factor
 
 session:
   name: authelia_session
   secret: somerandomsecret
   expiration: 8h
-  domain: {{ duckdns_domain }}
+  domain: {{ domain }}
   # refresh_interval: always
 
 regulation:
