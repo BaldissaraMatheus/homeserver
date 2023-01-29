@@ -38,11 +38,12 @@
     # - role: services/watchtower
     # - role: services/jellyseerr
     # - role: services/dash
-    - role: network/swag
+    # - role: network/swag
     # - role: services/ytdl-sub
     # - role: services/unmanic
     # - role: services/calibre
     # - role: services/nextcloud
-    # - role: services/focalboard
+    # - role: services/syncthing
+    - role: services/homarr
   tasks:
     - meta: noop

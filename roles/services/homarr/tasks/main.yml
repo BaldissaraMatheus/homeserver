@@ -1,0 +1,19 @@
+---
+- name: Create docker container for Homarr
+  docker_container:
+    name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/homarr/config:/app/data/configs"
+      - "{{ docker_containers_directory }}/homarr/icons:/app/public/icons"
+    ports:
+      - '7575:7575'
+    networks:
+      - name: services
+

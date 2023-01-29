@@ -1,0 +1,19 @@
+---
+- name: Create docker container for Nextcloud
+  docker_container:
+    name: nextcloud
+    image: linuxserver/nextcloud
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/nextcloud/config:/config"
+      - "{{ mergerfs_directory }}/personal/nextcloud:/data"
+    ports:
+      - '9025:443'
+    networks:
+      - name: services
+

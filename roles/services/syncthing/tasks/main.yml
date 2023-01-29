@@ -1,0 +1,23 @@
+---
+- name: Create docker container for Syncthing
+  docker_container:
+    name: syncthing
+    image: lscr.io/linuxserver/syncthing:latest
+    pull: yes
+    restart_policy: 'unless-stopped'
+    env:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: '{{ timezone }}'
+    volumes: 
+      - "{{ docker_containers_directory }}/syncthing:/config"
+      - "{{ mergerfs_directory }}/personal/nextcloud:/data1"
+    ports:
+      - '8384:8384'
+      - '22000:22000/tcp'
+      - '22000:22000/udp'
+      - '21027:21027/udp'
+    networks:
+      - name: services
+
+
