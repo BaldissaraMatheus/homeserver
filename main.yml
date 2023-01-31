@@ -19,7 +19,7 @@
     # - role: network/duckdns
     # - role: network/cloudflared
     # - role: filesystem/mergerfs
-    # - role: filesystem/snapraid
+    - role: filesystem/snapraid
     # - role: filesystem/essential
     # - role: filesystem/samba
     # - role: services/filebrowser
@@ -44,6 +44,6 @@
     # - role: services/calibre
     # - role: services/nextcloud
     # - role: services/syncthing
-    - role: services/homarr
+    # - role: services/homarr
   tasks:
     - meta: noop
