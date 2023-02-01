@@ -1,2 +1,4 @@
 collections:
   - name: kewlfft.aur
+roles:
+  - name: charliemaiors.rclone_ansible

@@ -20,6 +20,7 @@
     # - role: network/cloudflared
     # - role: filesystem/mergerfs
     - role: filesystem/snapraid
+    # - role: charliemaiors.rclone_ansible
     # - role: filesystem/essential
     # - role: filesystem/samba
     # - role: services/filebrowser
