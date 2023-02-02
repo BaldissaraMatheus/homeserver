@@ -1,10 +1,37 @@
-parity /mnt/sdc/snapraid.parity
+# Ansible managed
+#
+# SnapRAID configuration file
+
+# Parity location(s)
+1-parity /mnt/sdc/snapraid.parity
+
+# Content file location(s)
 content /var/snapraid/snapraid.content
-content /mnt/storage/snapraid.content
-data d1 /mnt/storage/
+content /mnt/sda4/snapraid.content
+content /mnt/sdb/snapraid.content
+
+# Data disks
+data d3 /mnt/sda4/
+data d4 /mnt/sdb/
+
+# Excludes hidden files and directories (uncomment to enable).
+
+exclude *.unrecoverable
 exclude /lost+found/
+exclude *.!sync
 exclude /tmp/
 exclude /downloads/
 exclude /configs/
 exclude /scripts/
 exclude /logs/
+exclude /personal/nextcloud/{{ ansible_user }}/files_trashbin/
+exclude /personal/nextcloud/{{ ansible_user }}/files_versions/
+exclude /personal/nextcloud/appdata_oc5voschoqrg/
+exclude /personal/nextcloud/files_external/
+exclude /personal/nextcloud/owncloud.db
+exclude /personal/nextcloud/nextcloud.log
+exclude /personal/nextcloud/index.html
+exclude /personal/nextcloud/owncloud.db-sh
+exclude /personal/nextcloud/owncloud.db-wal
+exclude /personal/nextcloud/.ocdata
+exclude /personal/nextcloud/.htaccess
