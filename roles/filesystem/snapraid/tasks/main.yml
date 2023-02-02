@@ -1,9 +1,9 @@
 ---
-# - name: Install snapraid
-#   kewlfft.aur.aur:
-#     use: yay
-#     name: 
-#       - snapraid
+- name: Install snapraid
+  kewlfft.aur.aur:
+    use: yay
+    name: 
+      - snapraid
 
 - name: Create configuration file
   template:
