@@ -1,14 +1,9 @@
 ---
-- name: Run tasks/other.yaml instead of 'main'
-  ansible.builtin.include_role:
-    name: ironicbadger.snapraid
-  ignore_errors: true
-
-- name: Install snapraid
-  kewlfft.aur.aur:
-    use: yay
-    name: 
-      - snapraid
+# - name: Install snapraid
+#   kewlfft.aur.aur:
+#     use: yay
+#     name: 
+#       - snapraid
 
 - name: Create configuration file
   template:
@@ -20,7 +15,7 @@
 
 - name: Ensures snapraid scripts folder exists
   file: 
-    path: "/mnt/storage/scripts/snapraid"
+    path: "/opt/scripts/snapraid"
     state: directory
 
 - name: Create logs file
@@ -34,7 +29,7 @@
 - name: Create snapraid-runner script file
   template:
     src: 'snapraid-runner.py'
-    dest: '/mnt/storage/scripts/snapraid/snapraid-runner.py'
+    dest: '/opt/scripts/snapraid/snapraid-runner.py'
     mode: 0755
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
@@ -42,10 +37,18 @@
 - name: Create snapraid-runner configuration file
   template:
     src: 'snapraid-runner.conf.j2'
-    dest: '/mnt/storage/scripts/snapraid/snapraid-runner.conf'
+    dest: '/opt/scripts/snapraid/snapraid-runner.conf'
     mode: 0755
     owner: '{{ ansible_user }}'
     group: '{{ ansible_user }}'
+
+- name: Create script file that runs snapraid-runner
+  template:
+    src: 'script.sh.j2'
+    dest: '/opt/scripts/snapraid/script.sh'
+    mode: 0755
+    owner: root
+    group: root
 
 - name: Create service for snapraid-runner
   template:
