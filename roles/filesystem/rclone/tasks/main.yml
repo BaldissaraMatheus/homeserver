@@ -1,0 +1,37 @@
+---
+- name: Install rclone
+  ansible.builtin.import_role:
+    name: charliemaiors.rclone_ansible
+
+- name: Create script file that runs rclone sync
+  template:
+    src: 'script.sh.j2'
+    dest: '/opt/scripts/rclone.sh'
+    mode: 0755
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+
+- name: Create service for rclone
+  template:
+    src: 'service.j2'
+    dest: '/etc/systemd/user/rclone.service'
+    mode: 0755
+    owner: root
+    group: root
+
+# Ansible is failing when trying to execute the service as user
+- name: Make sure service for rclone is enabled
+  shell: systemctl enable --user rclone.service
+  become: no
+
+- name: Create timer for rclone service
+  template:
+    src: 'timer.j2'
+    dest: '/etc/systemd/user/rclone.timer'
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Make sure timer for rclone is enabled
+  shell: systemctl enable --user rclone.timer --now
+  become: no

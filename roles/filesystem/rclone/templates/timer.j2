@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync rclone
+
+[Timer]
+Unit=rclone.service
+OnCalendar=weekly
+Persistent=true
+
+[Install]
+WantedBy=timers.target

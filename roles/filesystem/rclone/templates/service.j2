@@ -1,0 +1,9 @@
+[Unit]
+Description=Sync rclone
+
+[Service]
+Type=simple
+ExecStart=/opt/scripts/rclone.sh
+
+[Install]
+WantedBy=default.target

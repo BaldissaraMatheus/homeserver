@@ -1,0 +1,3 @@
+---
+local_sync_dir: "/mnt/storage/personal/nextcloud/{{ ansible_user }}/files/backuped"
+remote_sync_dir: "pcloud:main"
