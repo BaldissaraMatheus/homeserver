@@ -20,14 +20,14 @@
     # - role: network/cloudflared
     # - role: filesystem/mergerfs
     # - role: filesystem/snapraid
-    - role: filesystem/rclone
+    # - role: filesystem/rclone
     # - role: filesystem/essential
     # - role: filesystem/samba
     # - role: services/filebrowser
     # - role: services/plex
     # - role: services/jellyfin
     # - role: services/transmission
-    # - role: services/qbittorrent
+    - role: services/qbittorrent
     # - role: services/radarr
     # - role: services/sonarr
     # - role: services/lidarr

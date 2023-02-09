@@ -1,7 +1,8 @@
 - name: Create docker container for qbittorrent
   docker_container:
     name: qbittorrent
-    image: cr.hotio.dev/hotio/qbittorrent
+    # Reason for using legacy flag: https://github.com/linuxserver/docker-qbittorrent/issues/188
+    image: cr.hotio.dev/hotio/qbittorrent:legacy
     pull: yes
     restart_policy: 'unless-stopped'
     env:
