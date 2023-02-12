@@ -1,17 +1,35 @@
+---
+# With vuetorrent as frontend
+# - name: Create docker container for qbittorrent
+#   docker_container:
+#     name: qbittorrent
+#     # Reason for using legacy flag: https://github.com/linuxserver/docker-qbittorrent/issues/188
+#     image: cr.hotio.dev/hotio/qbittorrent:legacy
+#     pull: yes
+#     restart_policy: 'unless-stopped'
+#     env:
+#       PUID: '1000'
+#       PGID: '1000'
+#       UMASK: '002'
+#       TZ: '{{ timezone }}'
+#     volumes: 
+#       - "{{ docker_containers_directory }}/qbittorrent:/config"
+#       - "{{ mergerfs_directory }}/downloads:/app/qBittorrent/downloads"
+#     # network_mode: host
+#     network_mode: host
+
 - name: Create docker container for qbittorrent
   docker_container:
-    name: qbittorrent
+    name: qbittorrent-default
     # Reason for using legacy flag: https://github.com/linuxserver/docker-qbittorrent/issues/188
-    image: cr.hotio.dev/hotio/qbittorrent:legacy
+    image: lscr.io/linuxserver/qbittorrent:latest
     pull: yes
     restart_policy: 'unless-stopped'
     env:
       PUID: '1000'
       PGID: '1000'
-      UMASK: '002'
       TZ: '{{ timezone }}'
     volumes: 
       - "{{ docker_containers_directory }}/qbittorrent:/config"
-      - "{{ mergerfs_directory }}/downloads:/app/qBittorrent/downloads"
-    # network_mode: host
+      - "{{ mergerfs_directory }}/downloads:/downloads"
     network_mode: host
